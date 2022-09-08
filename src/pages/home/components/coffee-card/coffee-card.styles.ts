@@ -51,6 +51,36 @@ export const Tag = styled.div`
     color: ${props => props.theme["yellow-dark"]};
 `
 
-export const AddToCartContainer = styled.div`
+export const BuyContainer = styled.div`
     display: flex;
+    gap: 1rem;
+`
+export const PriceContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+`
+
+export const Currency = styled.span`
+    font-size: 1.4rem;
+    color: ${props => props.theme["base-text"]};
+`
+
+export const Price = styled.span`
+    font-family: ${props => props.theme["font-header"]};
+    font-weight: 800;
+    font-size: 2.4rem;
+    color: ${props => props.theme["base-text"]};
+`
+
+export const ShoppingCartButton = styled.button`
+    background-color: ${props => props.theme["purple-dark"]};
+    padding: 0.8rem;
+    outline: none;
+    border-radius: 6px;
+    color: ${props => props.theme["base-card"]};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 `
