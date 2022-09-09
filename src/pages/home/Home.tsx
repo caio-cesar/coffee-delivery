@@ -3,8 +3,9 @@ import { Products } from "./components/Products";
 
 export function Home() {
     return (
-    <main>
-        <Intro />    
-        <Products />
-    </main>)
+        <main>
+            <Intro />
+            <Products />
+        </main>
+    )
 }
