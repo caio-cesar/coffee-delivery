@@ -1,10 +1,10 @@
-import { CoffeeCard } from "../coffee-card";
+import { CoffeeCard } from "../CoffeeCard";
 import { CoffeeList, ProductsContainer } from "./products.styles";
 
 export function Products() {
     return (
         <ProductsContainer>
-            <h1>Nossos cafés</h1>
+            <h2>Nossos cafés</h2>
 
             <CoffeeList>
                 <CoffeeCard />

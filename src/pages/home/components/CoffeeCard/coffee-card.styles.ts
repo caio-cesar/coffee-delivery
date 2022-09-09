@@ -23,13 +23,6 @@ export const CoffeeBox = styled.div`
     margin-top: -4.5rem;
     padding: 2rem;
 
-    h1 {
-        font-family: ${props => props.theme["font-header"]};
-        font-weight: 700;
-        color: ${props => props.theme["base-subtitle"]};
-        font-size: 2rem;
-    }
-
     p {
         color: ${props => props.theme["base-label"]};
         font-size: 1.4rem;

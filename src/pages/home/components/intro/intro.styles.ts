@@ -25,14 +25,6 @@ export const IntroImg = styled.div`
     justify-content: flex-end;
 `
 
-export const Title = styled.h1`
-    font-size: 4.8rem;
-    font-family: ${props => props.theme["font-header"]};
-    font-weight: 800;
-    color: ${props => props.theme["base-title"]};
-    line-height: 6.24rem;
-`
-
 export const IntroItemContainer = styled.div`
     display: grid;
     grid-template-rows: repeat(2, 1fr);

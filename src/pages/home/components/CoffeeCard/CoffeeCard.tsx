@@ -13,6 +13,7 @@ import {
 import { ShoppingCart } from 'phosphor-react';
 
 import expresso from '../../../../assets/expresso.svg';
+import { Counter } from "../../../../components/Counter";
 
 export function CoffeeCard() {
     return (
@@ -25,7 +26,7 @@ export function CoffeeCard() {
                     <Tag>Gelado</Tag>
                 </TagContainer>
 
-                <h1>Expresso Tradicional</h1>
+                <h3>Expresso Tradicional</h3>
                 <p>O tradicional café feito com água quente e grãos moídos</p>
 
                 <BuyContainer>
@@ -33,6 +34,7 @@ export function CoffeeCard() {
                         <Currency>R$</Currency>
                         <Price>9,90</Price>
                     </PriceContainer>
+                    <Counter />
                     <div>
                     <ShoppingCartButton>
                         <ShoppingCart weight="fill" size={22} />
