@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router-dom";
+
 import { 
     HeaderContainer, 
     LocationCard, 
@@ -11,7 +13,7 @@ import {
 } from 'phosphor-react';
 
 import logo from '../../assets/logo.svg';
-import { Link, useNavigate } from "react-router-dom";
+
 
 export function Header() {
     let navigate = useNavigate();
