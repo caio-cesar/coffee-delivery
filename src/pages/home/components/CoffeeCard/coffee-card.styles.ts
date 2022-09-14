@@ -8,11 +8,11 @@ export const CoffeCardContainer = styled.div`
     border-top-right-radius: 36px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 36px;
+`
 
-    img {
-        width: 12rem;
-        height: 12rem;
-    }
+export const CoffeeImg = styled.img`
+    width: 12rem;
+    height: 12rem;
 `
 
 export const CoffeeBox = styled.div`

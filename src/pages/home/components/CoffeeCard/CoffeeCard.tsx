@@ -7,7 +7,8 @@ import {
     Price, 
     Tag, 
     TagContainer,
-    ShoppingCartButton
+    ShoppingCartButton,
+    CoffeeImg
 } from "./coffee-card.styles";
 
 import { ShoppingCart } from 'phosphor-react';
@@ -19,7 +20,7 @@ export function CoffeeCard() {
     return (
         <CoffeCardContainer>
             <CoffeeBox>
-                <img src={expresso}/>
+                <CoffeeImg src={expresso}/>
 
                 <TagContainer>
                     <Tag>Tradicional</Tag>

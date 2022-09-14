@@ -17,9 +17,8 @@ export const ActionButton = styled.button`
     outline: none;
     background-color: transparent;
 
-    img {
+`
+export const ImgIconAction = styled.img`
         width: 1.4rem;
         height: 1.4rem; 
-    }
-    
 `

@@ -1,23 +1,47 @@
+import { useNavigate } from "react-router-dom";
+
 import {
     Card,
     CheckoutContainer,
     FlexColumnContainer,
-    FlexRowAToTopContainer,
     EnderecoTituloContainer,
     CardTitle,
     CardDescription,
     PagamentoTituloContainer,
-    FormGridContainer,
     FlexRowContainer,
     FormContainer,
     Input,
     ButtonPagamento,
-    FormasPagamentoContainer
+    FormasPagamentoContainer,
+    CoffeCardContainer,
+    SelectedCoffeeList,
+    Summary,
+    ConfirmarPedidoContainer,
+    SummaryValue,
+    SummaryTitle,
+    SummaryTotal,
+    SummaryTotalTitle,
+    ConfirmarPedidoButton
 } from "./checkout.styles";
 
-import { CurrencyDollar, MapPinLine, CreditCard, Bank, Money } from "phosphor-react";
+import { 
+    CurrencyDollar, 
+    MapPinLine, 
+    CreditCard, 
+    Bank, 
+    Money 
+} from "phosphor-react";
+
+import { SelectedCoffee } from "./components/SelectedCoffee";
+
 
 export function Checkout() {
+    let navigate = useNavigate();
+
+    const navigateToSuccess = () => {
+        navigate('/checkout-success');
+    }
+
     return (
         <CheckoutContainer>
             <FlexColumnContainer gap="2rem">
@@ -59,7 +83,7 @@ export function Checkout() {
                         </FlexColumnContainer>
                     </PagamentoTituloContainer>
 
-                    <FormasPagamentoContainer gap="1rem">
+                    <FormasPagamentoContainer>
                         <ButtonPagamento>
                             <CreditCard size={16} />
                             <span>Cartão de Crédito</span>
@@ -70,16 +94,38 @@ export function Checkout() {
                         </ButtonPagamento>
                         <ButtonPagamento>
                             <Money size={16} />
-                            <span>DInheiro</span>
+                            <span>Dinheiro</span>
                         </ButtonPagamento>
                     </FormasPagamentoContainer>
                 </Card>
             </FlexColumnContainer>
             <FlexColumnContainer gap="2rem">
                 <h4>Cafés selecionados</h4>
-                <Card>
-                    Cafés selecionados
-                </Card>
+                <CoffeCardContainer>
+                    <SelectedCoffeeList>
+                        <li>
+                            <SelectedCoffee />
+                        </li>
+                        <li>
+                            <SelectedCoffee />
+                        </li>
+                    </SelectedCoffeeList>
+                    
+                    <Summary>
+                        <SummaryTitle>Total de Itens</SummaryTitle>
+                        <SummaryValue>R$ 29,70</SummaryValue>
+                        <SummaryTitle>Entrega</SummaryTitle>
+                        <SummaryValue>R$ 3,50</SummaryValue>
+                        <SummaryTotalTitle>Total</SummaryTotalTitle>
+                        <SummaryTotal>R$ 33,20</SummaryTotal>
+                        <ConfirmarPedidoContainer>
+                            <ConfirmarPedidoButton onClick={navigateToSuccess}>
+                                <span>Confirmar Pedido</span>
+                            </ConfirmarPedidoButton>
+                        </ConfirmarPedidoContainer>
+                    </Summary>
+                    
+                </CoffeCardContainer>
             </FlexColumnContainer>
         </CheckoutContainer>
     )

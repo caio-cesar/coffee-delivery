@@ -1,4 +1,4 @@
-import { ActionButton, CounterContainer } from "./counter.styles";
+import { ActionButton, CounterContainer, ImgIconAction } from "./counter.styles";
 import minus from '../../assets/minus.svg';
 import plus from '../../assets/plus.svg';
 import { useState } from "react";
@@ -19,11 +19,11 @@ export function Counter() {
     return (
         <CounterContainer>
             <ActionButton onClick={decreaseQuantity}>
-                <img src={minus} />
+                <ImgIconAction src={minus} />
             </ActionButton>
                 {quantity}
             <ActionButton onClick={increaseQuantity}>
-                <img src={plus} />
+                <ImgIconAction src={plus} />
             </ActionButton>
         </CounterContainer>
     )
