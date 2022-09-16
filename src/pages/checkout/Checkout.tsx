@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from 'react';
+
 import {
     Card,
     CheckoutContainer,
@@ -33,6 +35,7 @@ import {
 } from "phosphor-react";
 
 import { SelectedCoffee } from "./components/SelectedCoffee";
+import { CartContext } from "../../contexts/CartContext";
 
 
 export function Checkout() {
@@ -41,6 +44,8 @@ export function Checkout() {
     const navigateToSuccess = () => {
         navigate('/checkout-success');
     }
+
+    const { cartItems, cartTotal } = useContext(CartContext);
 
     return (
         <CheckoutContainer>
@@ -103,21 +108,20 @@ export function Checkout() {
                 <h4>Cafés selecionados</h4>
                 <CoffeCardContainer>
                     <SelectedCoffeeList>
-                        <li>
-                            <SelectedCoffee />
-                        </li>
-                        <li>
-                            <SelectedCoffee />
-                        </li>
+                        { cartItems.map(cartItem => (
+                            <li key={cartItem.product.id}>
+                                <SelectedCoffee productItem={cartItem} />
+                            </li>
+                        ))}
                     </SelectedCoffeeList>
                     
                     <Summary>
                         <SummaryTitle>Total de Itens</SummaryTitle>
-                        <SummaryValue>R$ 29,70</SummaryValue>
+                        <SummaryValue>R$ {cartTotal}</SummaryValue>
                         <SummaryTitle>Entrega</SummaryTitle>
                         <SummaryValue>R$ 3,50</SummaryValue>
                         <SummaryTotalTitle>Total</SummaryTotalTitle>
-                        <SummaryTotal>R$ 33,20</SummaryTotal>
+                        <SummaryTotal>R$ {cartTotal + 3.50}</SummaryTotal>
                         <ConfirmarPedidoContainer>
                             <ConfirmarPedidoButton onClick={navigateToSuccess}>
                                 <span>Confirmar Pedido</span>

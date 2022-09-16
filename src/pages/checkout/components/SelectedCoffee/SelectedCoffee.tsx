@@ -6,26 +6,53 @@ import {
     SelectedCoffeeContainer,
     SelectedCoffeeImg
 } from "./selected-coffee.styles";
-import expresso from '../../../../assets/expresso.svg';
+
 import { Counter } from "../../../../components/Counter";
 import { Trash } from 'phosphor-react';
+import { ProductItem } from "../../../../model/product-item";
+import { useContext, useState } from "react";
+import { CartContext } from "../../../../contexts/CartContext";
 
-export function SelectedCoffee() {
+interface SelectedCoffeeProps {
+    productItem: ProductItem;
+}
+
+export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
+    const [quantity, setQuantity] = useState(productItem.quantity);
+
+    const { removeItemFromCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
+
+    const handleRemoveItem = () => {
+        removeItemFromCart(productItem.product.id);
+    }
+
+    const handleIncreaseQuantity = (quantity: number) => {
+        increaseQuantity(productItem.product.id);
+    }
+
+    const handleDecreaseQuantity = (quantity: number) => {
+        decreaseQuantity(productItem.product.id);
+    }
+
     return (
         <SelectedCoffeeContainer>
-            <SelectedCoffeeImg src={expresso}/>
+            <SelectedCoffeeImg src={productItem.product.image}/>
             <InfoContainer>
-                <span>Expresso Tradicional</span>
+                <span>{productItem.product.name}</span>
                 <ActionsContainer>
-                    <Counter />
-                    <ButtonRemover>
+                    <Counter 
+                        onIncreaseQuantity={handleIncreaseQuantity} 
+                        onDecreaseQuantity={handleDecreaseQuantity}
+                        quantity={productItem.quantity}
+                    />
+                    <ButtonRemover onClick={handleRemoveItem}>
                         <Trash size={16} />
                         <span>Remover</span>
                     </ButtonRemover>
                 </ActionsContainer>
             </InfoContainer>
             <Price>
-                R$ 9,90
+                R$ {productItem.product.price}
             </Price>
         </SelectedCoffeeContainer>
     );

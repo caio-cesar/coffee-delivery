@@ -1,11 +1,14 @@
-import { createContext, ReactNode, useState } from "react";
-import { Product } from "../model/product";
+import { createContext, ReactNode, useReducer, useState } from "react";
 import { ProductItem } from "../model/product-item";
+import { CartActionTypes, createActionWithProductId, createAddItemToCartAction } from "../reducers/cart/cart-actions";
+import { cartReducer, CartState } from "../reducers/cart/cart-reducer";
 
 export interface CartContextProps {
-    items: ProductItem[];
+    cartItems: ProductItem[];
+    addItemToCart: (productItem: ProductItem) => void;
     removeItemFromCart: (productId: number) => void;
-    addItemToCart: (product: Product) => void;
+    increaseQuantity: (productId: number) => void;
+    decreaseQuantity: (productId: number) => void;
     cartCount: number;
     cartTotal: number;
 }
@@ -18,26 +21,41 @@ interface CartContextProviderProps {
     children: ReactNode;
 }
 
+const INITIAL_STATE: CartState = {
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0
+}
+
 export function CartContextProvider({ children }: CartContextProviderProps) {
-    const[items, setItems] = useState<ProductItem[]>([]);
-    const[cartCount, setCartCount] = useState<number>(0);
-    const[cartTotal, setCartTotal] = useState<number>(0);
+    
+    const[cartState, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+    
+    const { cartItems, cartCount, cartTotal } = cartState;
 
-    const removeItemFromCart = (productId: number) => {
-        setItems(items.filter(item => item.product.id !== productId));
-    };
-
-    const addItemToCart = (product: Product) => {
-
+    const addItemToCart = (productItem: ProductItem) => {
+        dispatch(createAddItemToCartAction(productItem));
     }
 
-    
+    const removeItemFromCart = (productId: number) => {
+        dispatch(createActionWithProductId(CartActionTypes.REMOVE_ITEM_FROM_CART, productId));
+    }
+
+    const increaseQuantity = (productId: number) => {
+        dispatch(createActionWithProductId(CartActionTypes.INCREASE_QUANTITY, productId));
+    }
+
+    const decreaseQuantity = (productId: number) => {
+        dispatch(createActionWithProductId(CartActionTypes.DECREASE_QUANTITY, productId));
+    }
 
     return (
         <CartContext.Provider value={{ 
-            items, 
-            removeItemFromCart, 
+            cartItems, 
             addItemToCart,
+            removeItemFromCart, 
+            increaseQuantity,
+            decreaseQuantity,
             cartCount,
             cartTotal  
         }}>

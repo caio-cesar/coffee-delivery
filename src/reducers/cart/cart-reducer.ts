@@ -3,7 +3,7 @@ import { CartActionTypes } from "./cart-actions";
 import { produce } from 'immer';
 import { WritableDraft } from "immer/dist/internal";
 
-interface CartState {
+export interface CartState {
     cartItems: ProductItem[];
     cartCount: number;
     cartTotal: number;
@@ -40,15 +40,15 @@ export function cartReducer(state: CartState, action: any) {
             })
         }
         case CartActionTypes.REMOVE_ITEM_FROM_CART: {
-            const productItem: ProductItem = action.payload.productItem;
-            const existingProductItemIndex = state.cartItems.findIndex(c => c.product.id === productItem.product.id);
+            const productId: number = action.payload.productId;
+            const existingProductItemIndex = state.cartItems.findIndex(c => c.product.id === productId);
 
             if (existingProductItemIndex < 0) {
                 return state;
             }
 
             return produce(state, draft => {
-                draft.cartItems = draft.cartItems.splice(existingProductItemIndex, 1);
+                draft.cartItems.splice(existingProductItemIndex, 1);
                 updateCartState(draft);
             })
         }
@@ -59,6 +59,7 @@ export function cartReducer(state: CartState, action: any) {
                 const productItemIndex = state.cartItems.findIndex(item => item.product.id === action.payload.productId);
                 if (productItemIndex >= 0) {
                     draft.cartItems[productItemIndex].quantity = draft.cartItems[productItemIndex].quantity + 1;
+                    updateCartState(draft);
                 }
             })
         }
@@ -71,13 +72,16 @@ export function cartReducer(state: CartState, action: any) {
                     const productItem: ProductItem = draft.cartItems[productItemIndex];
 
                     if (productItem.quantity <= 1) {
-                        draft.cartItems = draft.cartItems.splice(productItemIndex, 1);
+                        draft.cartItems.splice(productItemIndex, 1);
                     } else {
                         productItem.quantity = productItem.quantity - 1;
                     }
+                    updateCartState(draft);
                 }
             })
         }
 
+        default:
+            return state;
     }
 }

@@ -1,18 +1,24 @@
 import { ActionButton, CounterContainer, ImgIconAction } from "./counter.styles";
 import minus from '../../assets/minus.svg';
 import plus from '../../assets/plus.svg';
-import { useState } from "react";
 
-export function Counter() {
 
-    const [quantity, setQuantity] = useState<number>(1);
+interface CounterProps {
+    onIncreaseQuantity: (quantity: number) => void;
+    onDecreaseQuantity: (quantity: number) => void;
+    quantity : number;
+}
 
-    const increaseQuantity = () => setQuantity(quantity + 1);
+export function Counter({ onIncreaseQuantity, onDecreaseQuantity, quantity }: CounterProps) {
+
+    const increaseQuantity = () => {
+        onIncreaseQuantity(quantity + 1);
+    }
     const decreaseQuantity = () => {
         if (quantity <= 1) {
-            setQuantity(1);
+            onDecreaseQuantity(1);
         } else {
-            setQuantity(quantity - 1);
+            onDecreaseQuantity(quantity - 1);
         }
     }
 
