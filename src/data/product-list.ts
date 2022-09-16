@@ -16,7 +16,7 @@ import havaiano from '../assets/havaiano.svg';
 import arabe from '../assets/arabe.svg';
 import irlandes from '../assets/irlandes.svg';
 
-export const products: Product[] = [
+export const productList: Product[] = [
     {
         id: 1,
         name: 'Expresso Tradicional',
