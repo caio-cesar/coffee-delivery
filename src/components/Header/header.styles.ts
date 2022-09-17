@@ -42,4 +42,21 @@ export const Cart = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    position: relative;
+`
+export const CartItemCounter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props => props.theme["yellow-dark"]};
+    color: ${props => props.theme.white};
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -25%;
+    right: -25%;
+    z-index: 99;
 `

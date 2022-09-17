@@ -4,7 +4,8 @@ import {
     HeaderContainer, 
     LocationCard, 
     UserActionsContainer,
-    Cart 
+    Cart, 
+    CartItemCounter
 } from "./header.styles";
 
 import { 
@@ -13,6 +14,8 @@ import {
 } from 'phosphor-react';
 
 import logo from '../../assets/logo.svg';
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 
 export function Header() {
@@ -21,6 +24,8 @@ export function Header() {
     const navigateToCheckout = () => {
         navigate('/checkout');
     }
+
+    const { cartCount } = useContext(CartContext);
 
     return (
         <HeaderContainer>
@@ -34,6 +39,11 @@ export function Header() {
                     <span>Londrina, PR </span>
                 </LocationCard>
                 <Cart onClick={navigateToCheckout}>
+                    { cartCount > 0 && (
+                        <CartItemCounter>
+                        <span>{cartCount}</span>
+                        </CartItemCounter>
+                    )}
                     <ShoppingCart weight="fill" size={22} />
                 </Cart>
            </UserActionsContainer>

@@ -12,6 +12,7 @@ import { Trash } from 'phosphor-react';
 import { ProductItem } from "../../../../model/product-item";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
+import { PriceFormatter } from "../../../../components/shared/PriceFormatter";
 
 interface SelectedCoffeeProps {
     productItem: ProductItem;
@@ -52,7 +53,7 @@ export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
                 </ActionsContainer>
             </InfoContainer>
             <Price>
-                R$ {productItem.product.price}
+                R$ <PriceFormatter price={productItem.product.price} />
             </Price>
         </SelectedCoffeeContainer>
     );

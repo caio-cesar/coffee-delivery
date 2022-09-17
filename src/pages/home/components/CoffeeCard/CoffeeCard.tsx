@@ -11,12 +11,15 @@ import {
     CoffeeImg
 } from "./coffee-card.styles";
 
+import { NumericFormat } from 'react-number-format';
+
 import { ShoppingCart } from 'phosphor-react';
 
 import { Counter } from "../../../../components/Counter";
 import { Product } from "../../../../model/product";
 import { useState, useContext } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
+import { PriceFormatter } from "../../../../components/shared/PriceFormatter";
 
 interface CoffeeCardProps {
     product: Product;
@@ -52,7 +55,9 @@ export function CoffeeCard(props: CoffeeCardProps) {
                 <BuyContainer>
                     <PriceContainer>
                         <Currency>R$</Currency>
-                        <Price>{price}</Price>
+                        <Price>
+                            <PriceFormatter price={price} />
+                        </Price>
                     </PriceContainer>
                     <Counter 
                         onIncreaseQuantity={updateQuantity} 

@@ -36,6 +36,7 @@ import {
 
 import { SelectedCoffee } from "./components/SelectedCoffee";
 import { CartContext } from "../../contexts/CartContext";
+import { PriceFormatter } from "../../components/shared/PriceFormatter";
 
 
 export function Checkout() {
@@ -117,11 +118,15 @@ export function Checkout() {
                     
                     <Summary>
                         <SummaryTitle>Total de Itens</SummaryTitle>
-                        <SummaryValue>R$ {cartTotal}</SummaryValue>
+                        <SummaryValue>
+                            R$ <PriceFormatter price={cartTotal} />
+                        </SummaryValue>
                         <SummaryTitle>Entrega</SummaryTitle>
                         <SummaryValue>R$ 3,50</SummaryValue>
                         <SummaryTotalTitle>Total</SummaryTotalTitle>
-                        <SummaryTotal>R$ {cartTotal + 3.50}</SummaryTotal>
+                        <SummaryTotal>
+                            R$ <PriceFormatter price={cartTotal + 3.50} />
+                        </SummaryTotal>
                         <ConfirmarPedidoContainer>
                             <ConfirmarPedidoButton onClick={navigateToSuccess}>
                                 <span>Confirmar Pedido</span>

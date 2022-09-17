@@ -13,6 +13,8 @@ export const CounterContainer = styled.div`
 `
 
 export const ActionButton = styled.button`
+    display: flex;
+    align-items: center;
     cursor: pointer;
     outline: none;
     background-color: transparent;
