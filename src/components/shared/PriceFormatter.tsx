@@ -5,7 +5,12 @@ interface PriceFormatterProps {
 }
 
 export function PriceFormatter({ price }: PriceFormatterProps) {
+   
+    const newPrice = String(price.toFixed(2)).replace('.', ',');
+   
     return(
-        <NumericFormat displayType="text" value={price} decimalScale={2} fixedDecimalScale  decimalSeparator=","/>
+        <>
+            {newPrice}
+        </>
     )
 }

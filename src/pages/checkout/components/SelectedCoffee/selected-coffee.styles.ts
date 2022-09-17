@@ -48,9 +48,20 @@ export const ButtonRemover = styled.button`
     svg {
         color: ${props => props.theme.purple}
     }
+
     span {
         font-size: 1.2rem;
     }
 
+`
 
+export const PriceContainer = styled.div`
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+export const SubTotal = styled.span`
+    font-size: 1.2rem;
 `

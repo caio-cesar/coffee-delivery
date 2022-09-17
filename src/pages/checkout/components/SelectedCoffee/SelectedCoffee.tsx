@@ -3,8 +3,10 @@ import {
     ButtonRemover, 
     InfoContainer, 
     Price, 
+    PriceContainer, 
     SelectedCoffeeContainer,
-    SelectedCoffeeImg
+    SelectedCoffeeImg,
+    SubTotal
 } from "./selected-coffee.styles";
 
 import { Counter } from "../../../../components/Counter";
@@ -35,6 +37,8 @@ export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
         decreaseQuantity(productItem.product.id);
     }
 
+    const subTotal = productItem.quantity * productItem.product.price;
+
     return (
         <SelectedCoffeeContainer>
             <SelectedCoffeeImg src={productItem.product.image}/>
@@ -52,9 +56,15 @@ export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
                     </ButtonRemover>
                 </ActionsContainer>
             </InfoContainer>
-            <Price>
-                R$ <PriceFormatter price={productItem.product.price} />
-            </Price>
+            <PriceContainer>
+                <Price>
+                    R$ <PriceFormatter price={productItem.product.price} />
+                </Price>
+                <SubTotal>
+                    <br />
+                    <strong>R$ <PriceFormatter price={subTotal} /></strong>
+                </SubTotal>
+            </PriceContainer>
         </SelectedCoffeeContainer>
     );
 }

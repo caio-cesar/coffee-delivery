@@ -20,7 +20,7 @@ import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {
     let navigate = useNavigate();
-
+  
     const navigateToCheckout = () => {
         navigate('/checkout');
     }
