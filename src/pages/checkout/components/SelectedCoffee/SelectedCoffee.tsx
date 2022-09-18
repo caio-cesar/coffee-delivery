@@ -12,7 +12,7 @@ import {
 import { Counter } from "../../../../components/Counter";
 import { Trash } from 'phosphor-react';
 import { ProductItem } from "../../../../model/product-item";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
 import { PriceFormatter } from "../../../../components/shared/PriceFormatter";
 
@@ -21,8 +21,7 @@ interface SelectedCoffeeProps {
 }
 
 export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
-    const [quantity, setQuantity] = useState(productItem.quantity);
-
+    
     const { removeItemFromCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
 
     const handleRemoveItem = () => {

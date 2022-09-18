@@ -1,0 +1,2 @@
+export { FormasPagamento } from "./FormasPagamento";
+
