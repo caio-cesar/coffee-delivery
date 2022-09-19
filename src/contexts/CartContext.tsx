@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useReducer, useState } from "react";
 import { ProductItem } from "../model/product-item";
-import { CartActionTypes, createActionWithProductId, createAddItemToCartAction } from "../reducers/cart/cart-actions";
-import { cartReducer, CartState } from "../reducers/cart/cart-reducer";
+import { CartActionTypes, createActionWithProductId, createAddItemToCartAction, createClearItemsAction } from "../reducers/cart/cart-actions";
+import { cartReducer, CartState, INITIAL_CART_STATE } from "../reducers/cart/cart-reducer";
 
 export interface CartContextProps {
     cartItems: ProductItem[];
@@ -9,6 +9,7 @@ export interface CartContextProps {
     removeItemFromCart: (productId: number) => void;
     increaseQuantity: (productId: number) => void;
     decreaseQuantity: (productId: number) => void;
+    clearItems: () => void;
     cartCount: number;
     cartTotal: number;
 }
@@ -21,15 +22,10 @@ interface CartContextProviderProps {
     children: ReactNode;
 }
 
-const INITIAL_STATE: CartState = {
-    cartItems: [],
-    cartCount: 0,
-    cartTotal: 0
-}
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
     
-    const[cartState, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+    const[cartState, dispatch] = useReducer(cartReducer, INITIAL_CART_STATE);
     
     const { cartItems, cartCount, cartTotal } = cartState;
 
@@ -49,6 +45,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         dispatch(createActionWithProductId(CartActionTypes.DECREASE_QUANTITY, productId));
     }
 
+    const clearItems = () => {
+        dispatch(createClearItemsAction());
+    }
+
     return (
         <CartContext.Provider value={{ 
             cartItems, 
@@ -56,6 +56,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
             removeItemFromCart, 
             increaseQuantity,
             decreaseQuantity,
+            clearItems,
             cartCount,
             cartTotal  
         }}>

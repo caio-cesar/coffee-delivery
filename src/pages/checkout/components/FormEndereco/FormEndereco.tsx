@@ -61,7 +61,7 @@ export function FormEndereco() {
                                 <CampoObrigatorio />
                             )}
                         </FlexColumnContainer>
-                        <Input type="text" placeholder="Complemento" flexGrow="1" autoComplete="new-password" />
+                        <Input type="text" placeholder="Complemento" flexGrow="1"  {...register('complemento')} autoComplete="new-password" />
                     </FlexRowAToTopContainer>
 
                     <FlexRowContainer>

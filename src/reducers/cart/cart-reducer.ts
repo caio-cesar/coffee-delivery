@@ -9,6 +9,12 @@ export interface CartState {
     cartTotal: number;
 }
 
+export const INITIAL_CART_STATE: CartState = {
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0
+}
+
 const getQuantity = (items: ProductItem[]): number => {
     return items.reduce((total, cartItem) => total + cartItem.quantity, 0);
 }
@@ -79,6 +85,10 @@ export function cartReducer(state: CartState, action: any) {
                     updateCartState(draft);
                 }
             })
+        }
+
+        case CartActionTypes.CLEAR_ITEMS: {
+            return INITIAL_CART_STATE;
         }
 
         default:

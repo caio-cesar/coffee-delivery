@@ -14,12 +14,14 @@ import { useContext, useEffect, useState } from "react";
 import { CheckoutContext } from "../../contexts/CheckoutContext";
 import { CampoObrigatorio } from "../../components/shared/CampoObrigatorio";
 import { CartContext } from "../../contexts/CartContext";
+import { CheckoutSuccess } from "./components/CheckoutSuccess";
 
 
 export function Checkout() {
     const { updateFormaPagamento, formaPagamento } = useContext(CheckoutContext);
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, clearItems } = useContext(CartContext);
     const [validado, setValidado] = useState(false);
+    const [enviado, setEnviado] = useState(false);
 
     const showCheckoutPage: boolean = cartItems && cartItems.length > 0;
 
@@ -36,8 +38,10 @@ export function Checkout() {
         cidade: zod.string().min(1, 'Informe a tarefa'),
         uf: zod.nativeEnum(Estados)
     })
-
+    
     type EnderecoFormData = zod.infer<typeof enderecoFormValidationSchema>;
+    
+    const[dadosAtuais, setDadosAtuais] = useState<EnderecoFormData>();
 
     const enderecoForm = useForm<EnderecoFormData>({
         resolver: zodResolver(enderecoFormValidationSchema),
@@ -46,11 +50,17 @@ export function Checkout() {
             rua: '',
             complemento: '',
             bairro: '',
-            cidade: ''
+            cidade: '',
+            uf: undefined
         }
     });
 
     const { handleSubmit, reset } = enderecoForm;
+
+    const resetAll = () => {
+        reset();
+        clearItems();
+    }
 
     function handleCreateNovoPedido(data: EnderecoFormData) {
         setValidado(true);
@@ -58,12 +68,13 @@ export function Checkout() {
         if (!formaPagamento) {
             return;
         }
-
-        alert(JSON.stringify(data));
-        reset();
+        setDadosAtuais(data);
+        setEnviado(true);
+        resetAll();
     }
 
     return (
+        !enviado ? (
         showCheckoutPage ?
             (<form onSubmit={handleSubmit(handleCreateNovoPedido)} autoComplete="new-password">
                 <CheckoutContainer>
@@ -99,5 +110,15 @@ export function Checkout() {
                     </h2>
                 </NenhumItemCarrinho>
             )
+        ) : (
+            <CheckoutSuccess
+                cidade={dadosAtuais?.cidade} 
+                rua={dadosAtuais?.rua}
+                numero={dadosAtuais?.numero} 
+                complemento={dadosAtuais?.complemento}
+                formaPagamento={formaPagamento}
+                uf={dadosAtuais?.uf}
+                />
+        )
     )
 }

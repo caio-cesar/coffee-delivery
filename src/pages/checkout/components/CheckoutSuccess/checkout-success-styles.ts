@@ -91,3 +91,7 @@ export const GridContainer = styled.div`
 export const DeliveryGuyBox = styled.div`
     justify-self: flex-end;
 `
+
+export const Uf = styled.span`
+    text-transform: uppercase;
+`
