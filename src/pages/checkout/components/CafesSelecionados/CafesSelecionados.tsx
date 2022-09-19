@@ -46,7 +46,7 @@ export function CafesSelecionados() {
                     R$ <PriceFormatter price={cartTotal + 3.50} />
                 </SummaryTotal>
                 <ConfirmarPedidoContainer>
-                    <ConfirmarPedidoButton onClick={navigateToSuccess}>
+                    <ConfirmarPedidoButton type="submit">
                         <span>Confirmar Pedido</span>
                     </ConfirmarPedidoButton>
                 </ConfirmarPedidoContainer>

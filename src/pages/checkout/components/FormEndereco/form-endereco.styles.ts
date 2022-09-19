@@ -29,7 +29,7 @@ const defaultFormGap = css`
     gap: 1.5rem;
 `
 
-export const FormContainer = styled.form`
+export const FormContainer = styled.div`
     margin-top: 3rem;
 
     ${FlexColumnContainer}, ${FlexRowContainer} {
@@ -48,4 +48,12 @@ export const Input = styled.input<InputProps>`
     border: 1px solid ${props => props.theme["base-button"]};
     width: ${props => props.width};
     flex-grow: ${props => props.flexGrow || 0};
+`
+
+export const UFInput = styled(Input)`
+    text-transform: uppercase;
+`
+
+export const ValorInvalido = styled.span`
+    color: red;
 `

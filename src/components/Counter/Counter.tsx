@@ -24,11 +24,11 @@ export function Counter({ onIncreaseQuantity, onDecreaseQuantity, quantity }: Co
 
     return (
         <CounterContainer>
-            <ActionButton onClick={decreaseQuantity}>
+            <ActionButton type="button" onClick={decreaseQuantity}>
                 <ImgIconAction src={minus} />
             </ActionButton>
                 {quantity}
-            <ActionButton onClick={increaseQuantity}>
+            <ActionButton type="button" onClick={increaseQuantity}>
                 <ImgIconAction src={plus} />
             </ActionButton>
         </CounterContainer>

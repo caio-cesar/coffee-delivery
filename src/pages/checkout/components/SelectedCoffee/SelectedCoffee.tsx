@@ -49,7 +49,7 @@ export function SelectedCoffee({ productItem } : SelectedCoffeeProps) {
                         onDecreaseQuantity={handleDecreaseQuantity}
                         quantity={productItem.quantity}
                     />
-                    <ButtonRemover onClick={handleRemoveItem}>
+                    <ButtonRemover type="button" onClick={handleRemoveItem}>
                         <Trash size={16} />
                         <span>Remover</span>
                     </ButtonRemover>

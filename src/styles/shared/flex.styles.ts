@@ -19,3 +19,7 @@ export const FlexRowContainer = styled(FlexContainer)`
 export const FlexRowAToTopContainer = styled(FlexRowContainer)`
     align-items: flex-start;
 `
+export const FlexRowAtBottomContainer = styled(FlexRowContainer)`
+    align-items: flex-end;
+`
+

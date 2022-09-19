@@ -15,15 +15,15 @@ export function FormasPagamento() {
             </PagamentoTituloContainer>
 
             <FormasPagamentoContainer>
-                <ButtonPagamento>
+                <ButtonPagamento type="button">
                     <CreditCard size={16} />
                     <span>Cartão de Crédito</span>
                 </ButtonPagamento>
-                <ButtonPagamento>
+                <ButtonPagamento type="button">
                     <Bank size={16} />
                     <span>Cartão de Débito</span>
                 </ButtonPagamento>
-                <ButtonPagamento>
+                <ButtonPagamento type="button">
                     <Money size={16} />
                     <span>Dinheiro</span>
                 </ButtonPagamento>
