@@ -1,0 +1,5 @@
+export enum CheckoutAction {
+    UPDATE_CHECKOUT = 'UPDATE_CHECKOUT',
+    UPDATE_FORMA_PAGAMENTO = 'UPDATE_FORMA_PAGAMENTO'
+}
+

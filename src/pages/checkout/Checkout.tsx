@@ -3,16 +3,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from 'zod';
 
 import { Estados } from "../../data/estados";
-import { CheckoutContainer } from "./checkout.styles";
+import { CheckoutContainer, NenhumItemCarrinho } from "./checkout.styles";
 import { FlexColumnContainer } from "../../styles/shared/flex.styles";
 import { Card } from "../../styles/shared/card.styles";
 
 import { FormEndereco } from "./components/FormEndereco";
 import { FormasPagamento } from "./components/FormasPagamento";
 import { CafesSelecionados } from "./components/CafesSelecionados";
+import { useContext, useEffect, useState } from "react";
+import { CheckoutContext } from "../../contexts/CheckoutContext";
+import { CampoObrigatorio } from "../../components/shared/CampoObrigatorio";
+import { CartContext } from "../../contexts/CartContext";
 
 
 export function Checkout() {
+    const { updateFormaPagamento, formaPagamento } = useContext(CheckoutContext);
+    const { cartItems } = useContext(CartContext);
+    const [validado, setValidado] = useState(false);
+
+    const showCheckoutPage: boolean = cartItems && cartItems.length > 0;
+
+    useEffect(() => {
+        updateFormaPagamento(undefined);
+    }, []);
 
     const enderecoFormValidationSchema = zod.object({
         cep: zod.string().min(9, 'CEP obrigatório'),
@@ -36,34 +49,55 @@ export function Checkout() {
             cidade: ''
         }
     });
-    
-    const { handleSubmit, watch, reset } = enderecoForm;
+
+    const { handleSubmit, reset } = enderecoForm;
 
     function handleCreateNovoPedido(data: EnderecoFormData) {
-        console.log(data);
+        setValidado(true);
+
+        if (!formaPagamento) {
+            return;
+        }
+
         alert(JSON.stringify(data));
         reset();
     }
 
     return (
-        <form onSubmit={handleSubmit(handleCreateNovoPedido)} autoComplete="new-password">
-            <CheckoutContainer>
-                <FlexColumnContainer gap="2rem">
-                    <h4>Complete seu pedido</h4>
-                    <Card>
-                        <FormProvider {...enderecoForm}>
-                            <FormEndereco />
-                        </FormProvider>
-                    </Card>
-                    <Card>
-                        <FormasPagamento />
-                    </Card>
-                </FlexColumnContainer>
-                <FlexColumnContainer gap="2rem">
-                    <h4>Cafés selecionados</h4>
-                    <CafesSelecionados />
-                </FlexColumnContainer>
-            </CheckoutContainer>
-        </form>
+        showCheckoutPage ?
+            (<form onSubmit={handleSubmit(handleCreateNovoPedido)} autoComplete="new-password">
+                <CheckoutContainer>
+                    <FlexColumnContainer gap="2rem">
+                        <h4>Complete seu pedido</h4>
+                        <Card>
+                            <FormProvider {...enderecoForm}>
+                                <FormEndereco />
+                            </FormProvider>
+                        </Card>
+                        <Card>
+
+                            {(validado && !formaPagamento) && (
+                                <>
+                                    <CampoObrigatorio />
+                                    <br />
+                                    <br />
+                                </>
+                            )}
+
+                            <FormasPagamento />
+                        </Card>
+                    </FlexColumnContainer>
+                    <FlexColumnContainer gap="2rem">
+                        <h4>Cafés selecionados</h4>
+                        <CafesSelecionados />
+                    </FlexColumnContainer>
+                </CheckoutContainer>
+            </form>) : (
+                <NenhumItemCarrinho>
+                    <h2>
+                        Você não possui nenhum item no carrinho !
+                    </h2>
+                </NenhumItemCarrinho>
+            )
     )
 }
